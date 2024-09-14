@@ -97,10 +97,22 @@ window.onload = function () {
             dob: formatDisplayDate(dobDate),  // Store in dd/mm/yyyy format
             termsAccepted
         };
+        
+        // Update localStorage
         storedData.push(newUser);
         localStorage.setItem('userData', JSON.stringify(storedData));
 
-        populateTable();  // Update the table with new data
+        // Add new row to the table immediately
+        const newRow = `
+            <tr class="hover:bg-gray-100">
+                <td class="px-4 py-2 border">${newUser.name}</td>
+                <td class="px-4 py-2 border">${newUser.email}</td>
+                <td class="px-4 py-2 border">${newUser.password}</td>
+                <td class="px-4 py-2 border">${newUser.dob}</td>
+                <td class="px-4 py-2 border">${newUser.termsAccepted ? 'Yes' : 'No'}</td>
+            </tr>
+        `;
+        userTable.innerHTML += newRow;  // Append new row directly
 
         // Clear the form after submission
         registrationForm.reset();
